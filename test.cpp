@@ -6,6 +6,6 @@
 
 TEST_CASE()
 {
-    Lang l("testing this shit doe");
+    Lang l("   ");
     REQUIRE(l[0] == 0);
 }
