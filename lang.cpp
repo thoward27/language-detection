@@ -7,32 +7,14 @@
 
 using std::string;
 
-int power(int c, int b)
+int Lang::power(int c, int b)
 {
     // Returns a static cast int from the power function. 
-    return static_cast<int>(std::pow(static_cast<float>(c), b));
+    if (c == 0) return 0;
+    return c * static_cast<int>(std::pow(static_cast<float>(ascii_range), b));
 }
 
-struct VALS_TABLE
-{
-    // Setting all chars to 0 means for any valid ascii character we can filter and decide 
-    // if we do want to use it, or not just by asking is the lookup value > 0. 
-    int arr[256] = {-2};
-    VALS_TABLE()
-    {
-        // Skips
-        arr['\n'] = -1;
-        
-        // Valid Chars
-        int c=1;
-        for (int i='a'; i<='z'; i++)
-            arr[i] = c++;
-        
-        arr[' '] = 0;
-    }
-};
-
-Lang::Lang(string language, int n_gram):n(n_gram),len(power(asccii_range, n))
+Lang::Lang(string language, int n_gram):n(n_gram),len(power(ascii_range, n))
 {
     freq = new int[len]; // Frequency array
     compute_freq(language); // Fill the frequency array
