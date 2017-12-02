@@ -6,10 +6,15 @@
 
 using std::string;
 
+int power(int c, int b)
+{
+    return static_cast<int>(std::pow(static_cast<float>(c), b));
+}
+
 Lang::Lang(string language, int n_gram)
 {
     n = n_gram;
-    len = n*asccii_range;
+    len = power(asccii_range, n);
     freq = new int[len];
     compute_freq(language);
 }
@@ -25,10 +30,6 @@ void Lang::print()
         std::cout << freq[i] << std::endl;
 }
 
-int power(int c, int b)
-{
-    return static_cast<int>(std::pow(static_cast<float>(c), b));
-}
 
 void Lang::compute_freq(string language)
 {
@@ -41,4 +42,9 @@ void Lang::compute_freq(string language)
         }
         freq[index]++;
     }
+}
+
+int Lang::operator[](int i)
+{
+    return freq[i];
 }
