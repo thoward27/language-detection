@@ -31,20 +31,26 @@ void Lang::print()
         std::cout << freq[i] << std::endl;
 }
 
+int get_val(char c)
+{
+    if (c >= 'a' && c <= 'z')
+        return c-96;
+    else if (c == ' ')
+        return 0;
+    else
+        throw std::invalid_argument("Your language file has an unkown charcter in it!");
+}
+
 
 void Lang::compute_freq(string language)
 {
-    VALS_TABLE vals;
-    for (int i=0; i < static_cast<int>(language.size())-n; i++)
+    for (int i=0; i <= static_cast<int>(language.size())-n; i++)
     {
-        // Filter the character for bad chars, and newlines.
-        if (vals.arr[(int)language[i]] < -1) throw std::invalid_argument("Your language file has an unkown character in it!");
-        if (vals.arr[(int)language[i]] == -1) continue;
         // Otherwise, get the index to increment.
         int index=0;
         for (int j=0; j<n; j++)
         {
-            index += power(vals.arr[(int)language[i+j]], n-j-1); // n-j-1 because we have to include to the 0 power
+            index += power(get_val(language[i+j]), n-j-1); // n-j-1 because we have to include to the 0 power
         }
         
         freq[index]++;
