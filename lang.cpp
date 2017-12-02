@@ -23,7 +23,6 @@ Lang::Lang(string language, int n_gram):n(n_gram),len(power(ascii_range, n))
 Lang::~Lang()
 {
     delete[] freq;
-    delete[] table;
 }
 
 void Lang::print()
