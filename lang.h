@@ -16,4 +16,5 @@ public:
     ~Lang();
 
     void print();
+    int operator[](int i);
 };
