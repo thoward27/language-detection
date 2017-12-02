@@ -25,9 +25,14 @@ void Lang::print()
         std::cout << freq[i] << std::endl;
 }
 
+int power(int c, int b)
+{
+    return static_cast<int>(std::pow(static_cast<float>(c), b));
+}
+
 void Lang::compute_freq(string language)
 {
-    for (int i=0; i < language.size()-n; i++)
+    for (int i=0; i < static_cast<int>(language.size())-n; i++)
     {
         int index=0;
         for (int j=0; j<n; j++)
@@ -36,9 +41,4 @@ void Lang::compute_freq(string language)
         }
         freq[index]++;
     }
-}
-
-int power(int c, int b)
-{
-    return static_cast<int>(std::pow(static_cast<float>(c), 2.0));
 }
