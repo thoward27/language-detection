@@ -9,7 +9,9 @@ private:
     int n;
     int len;
     int* freq;
+    int* table;
 
+    void build_table();
     void compute_freq(std::string language);
 public:
     Lang(std::string language, int n=3);
