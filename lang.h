@@ -5,11 +5,10 @@
 class Lang
 {
 private:
-    int asccii_range = 27;
-    int n;
-    int len;
+    const int asccii_range = 27;
+    const int n;
+    const int len;
     int* freq;
-    int* table;
 
     void build_table();
     void compute_freq(std::string language);
