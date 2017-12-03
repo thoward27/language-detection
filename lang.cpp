@@ -28,7 +28,8 @@ Lang::~Lang()
 void Lang::print()
 {
     for (int i=0; i<len; i++)
-        std::cout << freq[i] << std::endl;
+        std::cout << freq[i] << " ";
+    std::cout << std::endl;
 }
 
 int get_val(char c)
