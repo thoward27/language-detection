@@ -44,7 +44,7 @@ int get_val(char c)
     else if (c == ' ')
         return 0;
     else
-        throw std::invalid_argument("Your language file has an unkown charcter in it!");
+        throw std::invalid_argument(std::string("Your language file has this invalid character in it: ") + c);
 }
 
 
