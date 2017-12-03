@@ -54,9 +54,7 @@ void Lang::compute_freq(string language)
     {
         int index=0;
         for (int j=0; j<n; j++)
-        {
             index += get_index(get_val(language[i+j]), n-j-1);
-        }
         
         freq[index]++;
     }
