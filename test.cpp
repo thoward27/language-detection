@@ -6,32 +6,28 @@
 
 TEST_CASE()
 {
-    SECTION("Three spaces")
+    SECTION("Three Character Tests")
     {
-        Lang l("   ");
-        REQUIRE(l[0] == 1);
+        REQUIRE(Lang("   ")[0] == 1);
+        REQUIRE(Lang("aaa")[757] == 1);
+        REQUIRE(Lang("zzz")[19682] == 1);
     }
-    SECTION("Four Spaces")
+    SECTION(">3 Character Tests")
     {
-        Lang l("    ");
-        REQUIRE(l[0] == 2);
+        REQUIRE(Lang("    ")[0] == 2);
+        REQUIRE(Lang("     ")[0] == 3);
     }
-    SECTION("Three a's")
-    {
-        Lang l("aaa");
-        REQUIRE(l[757] == 1);
-    }
-    SECTION("Three z's")
-    {
-        Lang l("zzz");
-        REQUIRE(l[19682] == 1);
-    }
-    SECTION("his")
+    SECTION("Sentence tests")
     {
         Lang l("    aaa his zzz");
         REQUIRE(l[0] == 2);
         REQUIRE(l[757] == 1);
         REQUIRE(l[19682] == 1);
         REQUIRE(l[6094] == 1);
+    }
+    SECTION("Invalid Init")
+    {
+        REQUIRE_THROWS(Lang("aa12@;;"));
+
     }
 }
