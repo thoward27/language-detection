@@ -20,8 +20,11 @@ private:
     // The internal frequency array. 
     int* freq;
 
-    // Computes the index for each character, uses ascii base. 
-    int power(int c, int b);
+    // Computes power when given two ints, n(umber) and p(ower)
+    int power(int n, int p);
+
+    // Returns index given a character and current base. 
+    int get_index(int c, int b);
 
     // Fills frequency table based on language.
     void compute_freq(std::string language);
