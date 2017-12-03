@@ -30,3 +30,5 @@
 tests
 
 frequencies
+
+*.log
