@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build tests",
             "type": "shell",
             "command": "g++",
             "args": [
@@ -12,19 +12,29 @@
                 "-Wall", "-Wextra",
                 "lang.cpp", "test.cpp",
                 "-o", "tests"
-            ],
+            ]
+        },
+        {
+            "label": "run tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/tests",
+            "dependsOn": "build tests",
             "group": {
-                "kind": "build",
+                "kind": "test",
                 "isDefault": true
             }
         },
         {
-            "label": "test",
+            "label": "build main",
             "type": "shell",
-            "command": "${workspaceFolder}/tests",
-            "dependsOn": "build",
+            "command": "g++",
+            "args": [
+                "-O3",
+                "lang.cpp", "main.cpp",
+                "-o", "frequencies"
+            ],
             "group": {
-                "kind": "test",
+                "kind": "build",
                 "isDefault": true
             }
         }
