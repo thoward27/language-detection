@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 {
     if (argc != 2) 
     {
-        std::cout << "Usage: " << argv[0] << " <STRING>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <STRING>" << std::endl;
         return 1;
     }
 
