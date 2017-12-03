@@ -46,11 +46,10 @@ void Lang::compute_freq(string language)
 {
     for (int i=0; i <= static_cast<int>(language.size())-n; i++)
     {
-        // Otherwise, get the index to increment.
         int index=0;
         for (int j=0; j<n; j++)
         {
-            index += power(get_val(language[i+j]), n-j-1); // n-j-1 because we have to include to the 0 power
+            index += power(get_val(language[i+j]), n-j-1);
         }
         
         freq[index]++;
