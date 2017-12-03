@@ -26,4 +26,12 @@ TEST_CASE()
         Lang l("zzz");
         REQUIRE(l[19682] == 1);
     }
+    SECTION("his")
+    {
+        Lang l("    aaa his zzz");
+        REQUIRE(l[0] == 2);
+        REQUIRE(l[757] == 1);
+        REQUIRE(l[19682] == 1);
+        REQUIRE(l[6094] == 1);
+    }
 }
