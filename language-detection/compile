@@ -13,15 +13,15 @@ case $1 in
   -nolink) link=none ; shift ;;  # don't link
 esac
 
-# use 'g++' as the compiler for debugging in ide50
+# use 'g++' as the compiler for debugging.
 CPP=g++
 
 # be aggressive about warnings and errors
 FLAGS="-O3"
 
 # clear out old object files
-rm -f *.o
+rm -f language
 
 # compile
 
-$CPP $FLAGS lang.cpp main.cpp -o frequencies
+$CPP $FLAGS lang.cpp main.cpp -o language
