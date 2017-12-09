@@ -27,16 +27,20 @@
         {
             "label": "build main",
             "type": "shell",
-            "command": "g++",
-            "args": [
-                "-O3",
-                "lang.cpp", "main.cpp",
-                "-o", "frequencies"
-            ],
+            "command": "${workspaceFolder}/language-detection/compile",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "test main",
+            "type": "shell",
+            "command": "${workspaceFolder}/language-detection/language",
+            "dependsOn": "build main",
+            "args": [
+                "data/training/*", "data/test/catalan"
+            ]
         }
     ]
 }
