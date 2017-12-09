@@ -33,3 +33,5 @@ frequencies
 
 data/
 *.log
+
+language-detection/language
