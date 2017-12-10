@@ -1,8 +1,7 @@
-#pragma once
-
 #include "lang.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 class Analysis 
 {
@@ -11,7 +10,7 @@ class Analysis
         Lang* test;
     public:
         Analysis();
-        Analysis(char* files[], int n);
+        Analysis(std::vector<std::string>);
         ~Analysis();
 
         std::string evaluate();
@@ -19,14 +18,15 @@ class Analysis
 
 Analysis::Analysis() {}
 
-Analysis::Analysis(char* files[], int n)
+Analysis::Analysis(std::vector<std::string> files)
 {
-    for (int i=0; i<n-1; i++)
+    test = new Lang(files.back());
+    files.pop_back();
+    for (std::string name : files)
     {
-        training.push_back(Lang(files[i], 3));
+        training.push_back(Lang(name));
     }
-    test = new Lang(files[n-1], 3);
-
+    std::cout << "leaving analysis " << std::endl;
 }
 
 Analysis::~Analysis()
@@ -44,6 +44,7 @@ std::string Analysis::evaluate()
         if (test_similarity > similarity) 
         {
             most_similar = x.get_name();
+            std::cout << "most sim: " << most_similar << std::endl;
             similarity = test_similarity;
         }
     }

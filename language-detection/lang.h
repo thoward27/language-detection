@@ -19,13 +19,6 @@ class Lang
     int *freq;
     // The name of the file.
     std::string name;
-
-    // Computes power when given two ints, n(umber) and p(ower)
-    int power(int n, int p);
-
-    // Returns index given a character and current base.
-    int get_index(int c, int b);
-
     // Fills frequency table based on language.
     void compute_freq(std::string language);
 
@@ -39,7 +32,6 @@ class Lang
      * Memory: O(n)
      */
     Lang(std::string language);
-    Lang();
 
     //! Destructor
     /** 

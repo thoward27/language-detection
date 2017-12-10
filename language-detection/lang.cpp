@@ -15,6 +15,7 @@ int get_val(char c)
         return c - 96;
     else if (c == ' ')
         return 0;
+    
     std::cerr << (int)c << std::endl;
     throw std::invalid_argument(std::string("Your language file has this invalid character in it: ") + c);
 }
@@ -22,7 +23,6 @@ int get_val(char c)
 Lang::Lang(string language)
 {
     name = language;
-    std::cout << "lang : " << language << std::endl;
     freq = new int[len]();  // Create the frequency array.
     compute_freq(language); // Fill the frequency array.
 }
@@ -31,20 +31,6 @@ Lang::~Lang()
 {
     // Free mem
     delete[] freq;
-}
-
-int Lang::get_index(int a, int b)
-{
-    // Return a * power of the ascii range to the current base.
-    return a * power(ascii_range, b);
-}
-
-int Lang::power(int n, int p)
-{
-    if (n == 0)
-        return 0;
-    // Returns a static cast int from the power function.
-    return static_cast<int>(std::pow(static_cast<float>(n), p));
 }
 
 void Lang::print() const
@@ -61,12 +47,10 @@ void Lang::compute_freq(string language)
     // From 0-length-n compute n_gram value and increment the frequency table by 1.
     string line;
     std::ifstream infile(language);
-    std::cout << infile.good() << std::endl;
     if (infile.good())
     {
         for (string line; std::getline(infile, line); )
         {
-            std::cout << line.size() << std::endl;
             for (int i = 0; i < static_cast<int>(line.size()) - 2; i++)
             {
                 int index = 0;
@@ -77,10 +61,11 @@ void Lang::compute_freq(string language)
                 freq[index]++;
             }
         }
-        std::cout << "Leaving " << std::endl;
     }
     else 
         throw std::invalid_argument("Can't open that file");
+    
+    infile.close();
 }
 
 int Lang::operator[](int i) const
