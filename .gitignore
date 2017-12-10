@@ -33,6 +33,7 @@ frequencies
 
 data/
 *.log
+callgrind.out.*
 
 language-detection/language
 
