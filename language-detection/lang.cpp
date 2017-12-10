@@ -27,6 +27,12 @@ Lang::Lang(string language)
     compute_freq(language); // Fill the frequency array.
 }
 
+Lang::Lang()
+{
+    name = "Blank";
+    freq = new int[len]();
+}
+
 Lang::~Lang()
 {
     // Free mem

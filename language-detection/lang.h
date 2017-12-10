@@ -33,6 +33,15 @@ class Lang
      */
     Lang(std::string language);
 
+    //! Default Constructor
+    /**
+     * Builds an empty Lang object.
+     * 
+     * Time: O(1)
+     * Memory: O(1)
+     */
+    Lang();
+
     //! Destructor
     /** 
      * Destroys the Lang object, and frees memory used for the table. 
