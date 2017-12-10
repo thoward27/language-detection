@@ -17,11 +17,11 @@ esac
 CPP=g++
 
 # be aggressive about warnings and errors
-FLAGS="-O3"
+FLAGS="-g -Wall -Wextra"
 
 # clear out old object files
 rm -f language
 
 # compile
 
-$CPP $FLAGS lang.cpp main.cpp -o language
+$CPP $FLAGS lang.cpp main.cpp analysis.hpp -o language
