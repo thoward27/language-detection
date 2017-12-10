@@ -63,7 +63,7 @@ void Lang::compute_freq(string language)
                 index += (get_val(line[i + 0]) * 27 * 27);
                 index += (get_val(line[i + 1]) * 27);
                 index += get_val(line[i + 2]);
-
+                
                 freq[index]++;
             }
         }
@@ -86,6 +86,14 @@ string Lang::get_name() const
 
 double Lang::similarity(Lang& l) const
 {
-    l.get_name();
-    return 1.0;
+    double product = 0;
+    double sqrt_a = 0;
+    double sqrt_b = 0;
+    for (int i=0; i<len; i++)
+    {
+        product += freq[i] * l[i];
+        sqrt_a += std::sqrt(static_cast<double>(std::pow(freq[i], 2)));
+        sqrt_b += std::sqrt(static_cast<double>(std::pow(l[i], 2)));
+    }
+    return (product / (sqrt_a * sqrt_b));
 }
