@@ -17,7 +17,7 @@ esac
 CPP=g++
 
 # be aggressive about warnings and errors
-FLAGS="-g -Wall -Wextra"
+FLAGS="-O3"
 
 # clear out old object files
 rm -f language
