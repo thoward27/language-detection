@@ -13,13 +13,11 @@ class Lang
   private:
     // The valid ascii range, to compute length of frequencies.
     const int ascii_range = 27;
-    // n signifies what n_gram analysis to provide.
-    const int n;
     // Len is the length of the interal frequency array.
-    const int len;
+    const int len = 19683;
     // The internal frequency array.
     int *freq;
-
+    // The name of the file.
     std::string name;
 
     // Computes power when given two ints, n(umber) and p(ower)
@@ -35,13 +33,12 @@ class Lang
     //! Constructor
     /** 
      * Builds a Lang object. 
-     * \param language a string of text.
-     * \param n is the n_gram to use for analysis. Default is 3, for trigram analysis.
+     * \param language is the filename to open.
      * 
      * Time: O(n)
      * Memory: O(n)
      */
-    Lang(std::string language, int n = 3);
+    Lang(std::string language);
     Lang();
 
     //! Destructor
