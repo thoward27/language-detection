@@ -24,4 +24,4 @@ rm -f language
 
 # compile
 
-$CPP $FLAGS lang.cpp main.cpp analysis.hpp -o language
+$CPP $FLAGS lang.cpp main.cpp -o language
