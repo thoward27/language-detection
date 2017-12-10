@@ -1,5 +1,5 @@
 
-#include "lang.h"
+#include "analysis.hpp"
 #include <stdexcept>
 #include <iostream>
 
@@ -11,6 +11,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    
+    Analysis(argv++, argc);
     return 0;
 }
