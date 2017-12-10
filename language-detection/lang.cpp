@@ -15,13 +15,14 @@ int get_val(char c)
         return c - 96;
     else if (c == ' ')
         return 0;
-    else
-        std::cerr << (int)c << std::endl;
-        throw std::invalid_argument(std::string("Your language file has this invalid character in it: ") + c);
+    std::cerr << (int)c << std::endl;
+    throw std::invalid_argument(std::string("Your language file has this invalid character in it: ") + c);
 }
 
-Lang::Lang(string language, int n_gram) : n(n_gram), len(power(ascii_range, n))
+Lang::Lang(string language)
 {
+    name = language;
+    std::cout << "lang : " << language << std::endl;
     freq = new int[len]();  // Create the frequency array.
     compute_freq(language); // Fill the frequency array.
 }
@@ -60,21 +61,26 @@ void Lang::compute_freq(string language)
     // From 0-length-n compute n_gram value and increment the frequency table by 1.
     string line;
     std::ifstream infile(language);
-    if (infile.is_open())
+    std::cout << infile.good() << std::endl;
+    if (infile.good())
     {
-        while (std::getline(infile, line))
+        for (string line; std::getline(infile, line); )
         {
-            std::cout << line << std::endl;
-            for (int i = 0; i <= static_cast<int>(line.size()) - 1 - n; i++)
+            std::cout << line.size() << std::endl;
+            for (int i = 0; i < static_cast<int>(line.size()) - 2; i++)
             {
                 int index = 0;
-                for (int j = 0; j < n; j++)
-                    index += get_index(get_val(line[i + j]), n - j - 1);
+                index += (get_val(line[i + 0]) * 27 * 27);
+                index += (get_val(line[i + 1]) * 27);
+                index += get_val(line[i + 2]);
 
                 freq[index]++;
             }
         }
+        std::cout << "Leaving " << std::endl;
     }
+    else 
+        throw std::invalid_argument("Can't open that file");
 }
 
 int Lang::operator[](int i) const
@@ -89,5 +95,6 @@ string Lang::get_name() const
 
 double Lang::similarity(Lang& l) const
 {
+    l.get_name();
     return 1.0;
 }
