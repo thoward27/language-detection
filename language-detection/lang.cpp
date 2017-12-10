@@ -15,9 +15,8 @@ int get_val(char c)
         return c - 96;
     else if (c == ' ')
         return 0;
-    
-    std::cerr << (int)c << std::endl;
-    throw std::invalid_argument(std::string("Your language file has this invalid character in it: ") + c);
+    else
+        throw std::invalid_argument(std::string("Your language file has this invalid character in it: ") + c);
 }
 
 Lang::Lang(string language)

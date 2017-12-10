@@ -19,6 +19,8 @@ class Lang
     int *freq;
     // The name of the file.
     std::string name;
+    // Square-Root of the Squared array
+    double sqrt_self;
     // Fills frequency table based on language.
     void compute_freq(std::string language);
 
