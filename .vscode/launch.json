@@ -8,8 +8,10 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tests",
-            "args": [],
+            "program": "${workspaceFolder}/language-detection/language",
+            "args": [
+                "data/training/catalan", "data/test/catalan"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -27,7 +29,7 @@
             "name": "(gdb) Attach",
             "type": "cppdbg",
             "request": "attach",
-            "program": "${workspaceFolder}/tests",
+            "program": "${workspaceFolder}/language-detection/language",
             "processId": "${command:pickProcess}",
             "MIMode": "gdb"
         }

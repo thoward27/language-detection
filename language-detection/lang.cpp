@@ -4,42 +4,9 @@
 #include <string>
 #include <cmath>
 #include <stdexcept>
+#include <fstream>
 
 using std::string;
-
-int Lang::get_index(int a, int b)
-{
-    // Return a * power of the ascii range to the current base.
-    return a * power(ascii_range, b);
-}
-
-int Lang::power(int n, int p)
-{
-    if (n == 0)
-        return 0;
-    // Returns a static cast int from the power function.
-    return static_cast<int>(std::pow(static_cast<float>(n), p));
-}
-
-Lang::Lang(string language, int n_gram) : n(n_gram), len(power(ascii_range, n))
-{
-    freq = new int[len]();  // Create the frequency array.
-    compute_freq(language); // Fill the frequency array.
-}
-
-Lang::~Lang()
-{
-    // Free mem
-    delete[] freq;
-}
-
-void Lang::print()
-{
-    // Prints entire frequency vector
-    for (int i = 0; i < len; i++)
-        std::cout << freq[i] << " ";
-    std::cout << std::endl;
-}
 
 int get_val(char c)
 {
@@ -52,21 +19,80 @@ int get_val(char c)
         throw std::invalid_argument(std::string("Your language file has this invalid character in it: ") + c);
 }
 
+Lang::Lang(string language)
+{
+    name = language;
+    freq = new int[len]();  // Create the frequency array.
+    compute_freq(language); // Fill the frequency array.
+}
+
+Lang::Lang()
+{
+    name = "Blank";
+    freq = new int[len]();
+}
+
+Lang::~Lang()
+{
+    // Free mem
+    delete[] freq;
+}
+
+void Lang::print() const
+{
+    // Prints entire frequency vector
+    for (int i = 0; i < len; i++)
+        std::cout << freq[i] << " ";
+    std::cout << std::endl;
+}
+
 void Lang::compute_freq(string language)
 {
     // Compute Frequency.
     // From 0-length-n compute n_gram value and increment the frequency table by 1.
-    for (int i = 0; i <= static_cast<int>(language.size()) - n; i++)
+    string line;
+    std::ifstream infile(language);
+    if (infile.good())
     {
-        int index = 0;
-        for (int j = 0; j < n; j++)
-            index += get_index(get_val(language[i + j]), n - j - 1);
-
-        freq[index]++;
+        for (string line; std::getline(infile, line); )
+        {
+            for (int i = 0; i < static_cast<int>(line.size()) - 2; i++)
+            {
+                int index = 0;
+                index += (get_val(line[i + 0]) * 27 * 27);
+                index += (get_val(line[i + 1]) * 27);
+                index += get_val(line[i + 2]);
+                
+                freq[index]++;
+            }
+        }
     }
+    else 
+        throw std::invalid_argument("Can't open that file");
+    
+    infile.close();
 }
 
-int Lang::operator[](int i)
+int Lang::operator[](int i) const
 {
     return freq[i];
+}
+
+string Lang::get_name() const
+{
+    return name;
+}
+
+double Lang::similarity(Lang& l) const
+{
+    double product = 0;
+    double sqrt_a = 0;
+    double sqrt_b = 0;
+    for (int i=0; i<len; i++)
+    {
+        product += freq[i] * l[i];
+        sqrt_a += std::sqrt(static_cast<double>(std::pow(freq[i], 2)));
+        sqrt_b += std::sqrt(static_cast<double>(std::pow(l[i], 2)));
+    }
+    return (product / (sqrt_a * sqrt_b));
 }
