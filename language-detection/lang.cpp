@@ -10,7 +10,9 @@ using std::string;
 
 int get_val(char c)
 {
-    // If it's a lowercase letter, val is c-96, otherwise if it's a space val is 0, otherwise invalid character.
+    // If it's a lowercase letter, val is c-96, 
+    // otherwise if it's a space val is 0, 
+    // otherwise invalid character.
     if (c >= 'a' && c <= 'z')
         return c - 96;
     else if (c == ' ')
@@ -28,19 +30,20 @@ Lang::Lang(string language)
 
 Lang::Lang()
 {
+    // Default name, and empty table. 
     name = "Blank";
     freq = new int[len]();
 }
 
 Lang::~Lang()
 {
-    // Free mem
+    // Free mem.
     delete[] freq;
 }
 
 void Lang::print() const
 {
-    // Prints entire frequency vector
+    // Prints contents of the frequency array. 
     for (int i = 0; i < len; i++)
         std::cout << freq[i] << " ";
     std::cout << std::endl;
@@ -48,16 +51,17 @@ void Lang::print() const
 
 void Lang::compute_freq(string language)
 {
-    // Compute Frequency.
-    // From 0-length-n compute n_gram value and increment the frequency table by 1.
-    string line;
     std::ifstream infile(language);
     if (infile.good())
     {
+        // For each string in the file:
         for (string line; std::getline(infile, line); )
         {
+            // Go to 2 off the end of the string, which prevents us from taking
+            // partial trigrams. 
             for (int i = 0; i < static_cast<int>(line.size()) - 2; i++)
             {
+                // Trigrams read left to right, rightmost being the highest value. 
                 int index = 0;
                 index += (get_val(line[i + 0]) * 27 * 27);
                 index += (get_val(line[i + 1]) * 27);
@@ -75,6 +79,7 @@ void Lang::compute_freq(string language)
 
 int Lang::operator[](int i) const
 {
+    // Return i-th position in the frequency array. 
     return freq[i];
 }
 
@@ -85,6 +90,7 @@ string Lang::get_name() const
 
 double Lang::similarity(Lang& l) const
 {
+    // cos similarity
     double product = 0;
     double sqrt_a = 0;
     double sqrt_b = 0;
