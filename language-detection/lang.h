@@ -24,6 +24,8 @@ class Lang
     // Fills frequency table based on language.
     void compute_freq(std::string language);
 
+    long double precision;
+
   public:
     //! Constructor
     /** 
@@ -69,7 +71,7 @@ class Lang
      * Time: O(n)
      * Memory: O(1)
      */
-    double similarity(Lang&) const;
+    long double similarity(Lang&) const;
 
     //! Get Name
     /** 

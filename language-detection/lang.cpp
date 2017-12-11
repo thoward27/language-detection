@@ -88,17 +88,17 @@ string Lang::get_name() const
     return name;
 }
 
-double Lang::similarity(Lang& l) const
+long double Lang::similarity(Lang& l) const
 {
     // cos similarity
-    double product = 0;
-    double sqrt_a = 0;
-    double sqrt_b = 0;
+    long double product = 0;
+    long double sqrt_a = 0;
+    long double sqrt_b = 0;
     for (int i=0; i<len; i++)
     {
         product += freq[i] * l[i];
-        sqrt_a += std::sqrt(static_cast<double>(std::pow(freq[i], 2)));
-        sqrt_b += std::sqrt(static_cast<double>(std::pow(l[i], 2)));
+        sqrt_a += std::sqrt(static_cast<long double>(std::pow(freq[i], 2)));
+        sqrt_b += std::sqrt(static_cast<long double>(std::pow(l[i], 2)));
     }
     return (product / (sqrt_a * sqrt_b));
 }
